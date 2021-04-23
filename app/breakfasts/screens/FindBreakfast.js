@@ -1,15 +1,21 @@
-import React, {useState} from 'react'
-import {View} from 'react-native'
-import { StyleSheet, Text, TextInput, ImageBackground, Alert, TouchableOpacity} from 'react-native';
+import React, {useState, useEffect} from 'react'
+import {View, Text, StatusBar, Button} from 'react-native'
+import { StyleSheet} from 'react-native';
+import MapView, { Callout, Marker, PROVIDER_GOOGLE } from "react-native-maps";
+import firebase from './../../../firebase'
+import database from '@react-native-firebase/database';
+const db = firebase.firestore();
 
+export default function FindBreakfast() {
 
-export default function AddBreakfast() {
-  
-  const [place, setPlace] = useState("")
+  const [mapData, setMapData] = useState([])
 
- const  getAllBreakFest = async ()  => {
-    const breakfast = firebase.firestore().collection('breackFest')
-    const querySnapshot = await breakfast.get()
+  async function getData() {
+
+            
+
+    const assistances = firebase.firestore().collection('breackFest')
+    const querySnapshot = await assistances.get()
     const tempDoc = querySnapshot.docs.map((doc) => {
       return { id: doc.id, ...doc.data() }
     })
@@ -17,60 +23,96 @@ export default function AddBreakfast() {
     // console.log(tempDoc);
     // console.log('====================================');
     const allAssistances = tempDoc;
- 
-    // console.log('********************************');
-    // console.log(allAssistances);
-    // console.log('********************************');
+    setMapData(allAssistances)
+    console.log('********************************');
+    console.log(allAssistances);
+    console.log('********************************');
     return allAssistances;
 }
+
+  
+function setMap(){
+  return mapData.map(item => <Marker key={item.id}   icon={require('./../../../assets/ramadan.png')}  coordinate={{latitude: item.latitude , longitude: item.longtitude }}>
+
+    </Marker>)
+}
+
+    
+
+console.log("hhkddbhsqhdqs");
+
+  const reservation = (id, place) => {
+    if (place > 0) {
+      db.collection('breackFest')
+        .doc(id)
+        .update({
+          place: place - 1,
+        });
+      console.log(id);
+    }
+  };
+
 
 
   return (
         <View >
-       <Text style={styles.title}>Afficher un aide place</Text>
 
-       <View style={{marginRight: 5}}>
+        <StatusBar translucent={false} />
 
-       <Text>Longtitude :</Text>
-       <TextInput
-       placeholder="Longtitude"
-       style={styles.input}
-     />
+        <View style={{paddingTop: 100}}>
+        <Button
+         onPress={() => getData()}
+         title="Get Data"/>
+        </View>
 
-     
-    <TouchableOpacity
-     style={styles.someStyles}
-   >
-     <Text style={{color: 'white'}} >Add Breakfast</Text>
-   </TouchableOpacity>
-
-
+        <View style={styles.caderMap}>
+       <MapView 
+       provider={PROVIDER_GOOGLE}
+       style={styles.map}
+       initialRegion={{
+         latitude: 32.29512789087331,
+         longitude: -9.233774559186537,
+         latitudeDelta: 0.0222,
+         longitudeDelta: 0.0121,
+        }}
+        >
+        
+        {setMap()}
+     </MapView>
        </View>
+
         </View>
     )
 }
 
 
 const styles = StyleSheet.create({
-  input: {
-      width : 400,
-      padding: 10,
-      borderRadius:2,
-      marginBottom: 5,
-      borderWidth : 2,
-      borderRadius: 5,
-  },
-  someStyles: {
-    backgroundColor: '#2488EC',
-    paddingHorizontal: 10, 
-    paddingVertical: 12,
-    marginHorizontal: 5,
-    alignItems: 'center', 
-    borderRadius: 4
-  },
- title: {
-   fontSize: 30,
-   paddingVertical: 20
-   
- }
+ map: {
+   flex: 1,
+   width: 400,
+   height: 'auto',
+ },
+
+ someStyles: {
+  backgroundColor: '#2488EC',
+  paddingHorizontal: 10, 
+  paddingVertical: 12,
+  marginHorizontal: 5,
+  alignItems: 'center', 
+  borderRadius: 4
+},
+reservation: {
+  flexDirection: 'row', 
+  justifyContent: 'space-around',
+  paddingVertical: 20
+},
+value: {
+  borderColor: '#2488EC',
+  borderWidth: 3,
+  flexDirection: 'row',
+  alignItems: 'center',
+  paddingHorizontal: 20,
+  paddingHorizontal: 20,
+  borderRadius: 5
+}
 });

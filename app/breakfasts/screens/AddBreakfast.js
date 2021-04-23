@@ -69,8 +69,7 @@ export default function AddBreakfast() {
      
     <TouchableOpacity
      style={styles.someStyles}
-     onPress={() => { addBreackFest() }}
-   >
+     onPress={() => { addBreackFest() }}>
      <Text style={{color: 'white'}} >Add Breakfast</Text>
    </TouchableOpacity>
 
