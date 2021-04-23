@@ -30,13 +30,29 @@ export default function FindBreakfast() {
     return allAssistances;
 }
 
-  
+  const mapss =[{latitude:32.28306784769214,longitude:-9.238074630406645 },{latitude:32.285144469410014,longitude:-9.243672819824713 }]
 function setMap(){
-  return mapData.map(item => <Marker key={item.id}   icon={require('./../../../assets/ramadan.png')}  coordinate={{latitude: item.latitude , longitude: item.longtitude }}>
-
+  return mapData.map(item => <Marker key={item.id}   coordinate={{latitude: item.latitude , longitude: item.longtitude }}>
+    <Callout
+    tooltip
+    onPress={() => {
+      reservation(item.id, item.place);
+    }}
+  >
+    <View style={styles.modal}>
+      <Text style={styles.title}>Description</Text>
+      <Text style={styles.text}>{item.description}</Text>
+      <Text style={styles.title}>Places number</Text>
+      {item.place ? (
+        <Text style={styles.text}>{item.place}</Text>
+      ) : (
+        <Text style={styles.full}>Full</Text>
+      )}
+      <Text style={styles.press}>Press here to reserve</Text>
+    </View>
+  </Callout>
     </Marker>)
 }
-
     
 
 console.log("hhkddbhsqhdqs");
@@ -114,5 +130,36 @@ value: {
   paddingHorizontal: 20,
   paddingHorizontal: 20,
   borderRadius: 5
+},
+text: {
+  textAlign: "center",
+  fontSize: 15,
+  fontFamily: "monospace",
+},
+full: {
+  textAlign: "center",
+  fontSize: 15,
+  fontFamily: "monospace",
+  color: "red",
+},
+title: {
+  textAlign: "center",
+  fontSize: 20,
+  fontFamily: "monospace",
+  fontWeight: "bold",
+},
+press: {
+  textAlign: "center",
+  fontSize: 15,
+  fontFamily: "monospace",
+  color: "blue",
+  textDecorationLine: "underline",
+},
+modal: {
+  backgroundColor: "white",
+  width: 200,
+  padding: 10,
+  borderRadius: 10,
+  textAlign: "center",
 }
 });
