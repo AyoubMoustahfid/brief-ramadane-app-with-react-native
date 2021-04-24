@@ -4,6 +4,8 @@ import {NativeRouter, Switch, Route, Redirect} from 'react-router-native'
 import { StyleSheet, Text, View } from 'react-native';
 import FindBreakfast from './app/breakfasts/screens/FindBreakfast'
 import AddBreakfast from './app/breakfasts/screens/AddBreakfast'
+import AddAssistance from './app/assistances/screens/AddAssistance'
+import FindAssistance from './app/assistances/screens/FindAssistance'
 
 export default function App() {
   return (
@@ -11,6 +13,8 @@ export default function App() {
       <Switch>
         <Route exact path="/" component={AddBreakfast} />
         <Route exact path="/findBreakfest" component={FindBreakfast} />
+        <Route exact path="/addAssistance" component={AddAssistance} />
+        <Route exact path="/findAssistance" component={FindAssistance} />
       </Switch>
     </NativeRouter>
   );
