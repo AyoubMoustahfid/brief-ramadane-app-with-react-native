@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import {View} from 'react-native'
 import { StyleSheet, Text, TextInput, ImageBackground, Alert, TouchableOpacity} from 'react-native';
 import firebase from './../../../firebase'
-
+import {Link, useHistory} from 'react-router-native' 
 const db = firebase.firestore();
 
 
@@ -14,7 +14,7 @@ export default function AddBreakfast() {
   const [longtitude, setLongtitude] = useState("")
 
 
-  const addBreackFest = () => {
+  const addBreackFest = (props) => {
     if (db) {
       db.collection('breackFest').add({
           place: Number(place),
@@ -22,7 +22,7 @@ export default function AddBreakfast() {
           latitude: latitude,
           longtitude: longtitude,
       })
-       
+       props.history.push('/findBreakfest')
   }
   }
 
