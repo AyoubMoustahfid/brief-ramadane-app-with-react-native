@@ -29,10 +29,10 @@ export default function AddAssistance(props) {
 
 
   return (
-        <View >
+    <View style={{flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flex: 1, height: '100%'}}>
        <Text style={styles.title}>Ajouté un aide futors</Text>
 
-       <View style={{marginRight: 5}}>
+       <View >
        <Text>Place :</Text>
        <TextInput
        placeholder="Place"
@@ -81,25 +81,23 @@ export default function AddAssistance(props) {
 
 
 const styles = StyleSheet.create({
-  input: {
-      width : 400,
-      padding: 10,
-      borderRadius:2,
-      marginBottom: 5,
-      borderWidth : 2,
-      borderRadius: 5,
-  },
-  someStyles: {
-    backgroundColor: '#2488EC',
-    paddingHorizontal: 10, 
-    paddingVertical: 12,
-    marginHorizontal: 5,
-    alignItems: 'center', 
-    borderRadius: 4
-  },
- title: {
-   fontSize: 30,
-   paddingVertical: 20
-   
- }
+    input: {
+        width : 400,
+        padding: 10,
+        borderRadius:2,
+        marginBottom: 5,
+        borderWidth : 2,
+        borderRadius: 5,
+    },
+    someStyles: {
+      backgroundColor: '#2488EC',
+      paddingVertical: 12,
+      alignItems: 'center', 
+      borderRadius: 4
+    },
+   title: {
+     fontSize: 30,
+     paddingVertical: 20
+     
+   }
 });

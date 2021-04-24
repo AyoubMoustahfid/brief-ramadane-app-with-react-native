@@ -29,7 +29,7 @@ export default function AddBreakfast(props) {
 
 
   return (
-        <View >
+        <View style={{flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flex: 1, height: '100%'}}>
        <Text style={styles.title}>Ajouté un aide place</Text>
 
        <View style={{marginRight: 5}}>
@@ -91,9 +91,7 @@ const styles = StyleSheet.create({
   },
   someStyles: {
     backgroundColor: '#2488EC',
-    paddingHorizontal: 10, 
     paddingVertical: 12,
-    marginHorizontal: 5,
     alignItems: 'center', 
     borderRadius: 4
   },
