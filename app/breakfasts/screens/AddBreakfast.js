@@ -6,7 +6,7 @@ import {Link, useHistory} from 'react-router-native'
 const db = firebase.firestore();
 
 
-export default function AddBreakfast() {
+export default function AddBreakfast(props) {
   
   const [place, setPlace] = useState("")
   const [description, setDescription] = useState("")
@@ -14,7 +14,7 @@ export default function AddBreakfast() {
   const [longtitude, setLongtitude] = useState("")
 
 
-  const addBreackFest = (props) => {
+  const addBreackFest = () => {
     if (db) {
       db.collection('breackFest').add({
           place: Number(place),

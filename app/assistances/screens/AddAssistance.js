@@ -6,7 +6,7 @@ import {Link, useHistory} from 'react-router-native'
 const db = firebase.firestore();
 
 
-export default function AddAssistance() {
+export default function AddAssistance(props) {
   
   const [place, setPlace] = useState("")
   const [description, setDescription] = useState("")
@@ -14,7 +14,7 @@ export default function AddAssistance() {
   const [longtitude, setLongtitude] = useState("")
 
 
-  const addBreackFest = (props) => {
+  const addAssistance = () => {
     if (db) {
       db.collection('assistance').add({
           place: Number(place),
@@ -69,7 +69,7 @@ export default function AddAssistance() {
      
     <TouchableOpacity
      style={styles.someStyles}
-     onPress={() => { addBreackFest() }}>
+     onPress={() => { addAssistance() }}>
      <Text style={{color: 'white'}} >Add Breakfast</Text>
    </TouchableOpacity>
 
