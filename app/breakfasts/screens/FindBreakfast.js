@@ -31,29 +31,7 @@ export default function FindBreakfast() {
 }
 
   const mapss =[{latitude:32.28306784769214,longitude:-9.238074630406645 },{latitude:32.285144469410014,longitude:-9.243672819824713 }]
-function setMap(){
-  return mapData.map(item => <Marker key={item.id}   coordinate={{latitude: item.latitude , longitude: item.longtitude }}>
-    <Callout
-    tooltip
-    onPress={() => {
-      reservation(item.id, item.place);
-    }}
-  >
-    <View style={styles.modal}>
-      <Text style={styles.title}>Description</Text>
-      <Text style={styles.text}>{item.description}</Text>
-      <Text style={styles.title}>Places number</Text>
-      {item.place ? (
-        <Text style={styles.text}>{item.place}</Text>
-      ) : (
-        <Text style={styles.full}>Full</Text>
-      )}
-      <Text style={styles.press}>Press here to reserve</Text>
-    </View>
-  </Callout>
-    </Marker>)
-}
-    
+ 
 
 console.log("hhkddbhsqhdqs");
 
@@ -75,26 +53,36 @@ console.log("hhkddbhsqhdqs");
 
         <StatusBar translucent={false} />
 
-        <View style={{paddingTop: 100}}>
+        <View >
         <Button
          onPress={() => getData()}
          title="Get Data"/>
         </View>
 
         <View style={styles.caderMap}>
-       <MapView 
-       provider={PROVIDER_GOOGLE}
-       style={styles.map}
-       initialRegion={{
-         latitude: 32.29512789087331,
-         longitude: -9.233774559186537,
-         latitudeDelta: 0.0222,
-         longitudeDelta: 0.0121,
+  
+        <MapView
+        provider = {PROVIDER_GOOGLE}
+        style = {styles.map}
+        initialRegion = {{
+          latitude : 32.29512789087331,
+          longitude : -9.233774559186537,
+          latitudeDelta : 0.0222,
+          longitudeDelta : 0.0121 
         }}
         >
-        
-        {setMap()}
-     </MapView>
+     
+            
+                {
+                   mapData && mapData.map(item => {
+                       return (
+                        <Marker  coordinate={{latitude: item.latitude , longitude: item.longitude }}
+                        title="hello world" ></Marker> 
+                       )
+                   })
+                }
+            
+        </MapView>
        </View>
 
         </View>

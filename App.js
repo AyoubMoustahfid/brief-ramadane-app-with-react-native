@@ -11,9 +11,9 @@ export default function App() {
   return (
     <NativeRouter>
       <Switch>
-        <Route exact path="/" component={AddBreakfast} />
+        <Route exact path="/addBreakfest" component={AddBreakfast} />
         <Route exact path="/findBreakfest" component={FindBreakfast} />
-        <Route exact path="/addAssistance" component={AddAssistance} />
+        <Route exact path="/" component={AddAssistance} />
         <Route exact path="/findAssistance" component={FindAssistance} />
       </Switch>
     </NativeRouter>
